@@ -14,14 +14,14 @@ Curated collection of custom **GitHub Copilot agent modes** for VS Code — drop
 
 | Agent | Description | Install |
 | --- | --- | --- |
-| **React 19 Plan** | Strategic planning agent that researches your codebase, clarifies requirements, and creates detailed implementation plans using modern React 19 patterns. Hands off to the implementation agent when ready. | [Install](https://github.com/suditugeorge/github-copilot-tricks/blob/main/agents/react-19-plan.agent.md) |
-| **Expert React Frontend Engineer** | World-class React 19.2 implementation agent with deep knowledge of modern hooks, Server Components, Actions, TypeScript, and performance optimization. | [Install](https://github.com/suditugeorge/github-copilot-tricks/blob/main/agents/expert-react-frontend-engineer.agent.md) |
+| **[React 19 Plan](agents/react-19-plan.agent.md)** | Strategic planning agent that researches your codebase, clarifies requirements, and creates detailed implementation plans using modern React 19 patterns. Hands off to the implementation agent when ready. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/agent?url=vscode%3Achat-agent%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2Fagents%2Freact-19-plan.agent.md) [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/agent?url=vscode-insiders%3Achat-agent%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2Fagents%2Freact-19-plan.agent.md) |
+| **[Expert React Frontend Engineer](agents/expert-react-frontend-engineer.agent.md)** | World-class React 19.2 implementation agent with deep knowledge of modern hooks, Server Components, Actions, TypeScript, and performance optimization. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/agent?url=vscode%3Achat-agent%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2Fagents%2Fexpert-react-frontend-engineer.agent.md) [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/agent?url=vscode-insiders%3Achat-agent%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2Fagents%2Fexpert-react-frontend-engineer.agent.md) |
 
 ## Quick Start
 
 ### One-click install
 
-Click the **Install** link next to any agent above. GitHub will show an "Install in VS Code" button that adds the agent directly to your editor.
+Click the **VS Code Install** badge next to any agent above. It will open VS Code and install the agent directly.
 
 ### Manual install
 
