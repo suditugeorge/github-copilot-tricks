@@ -4,7 +4,7 @@ Curated collection of custom **GitHub Copilot agent modes** for VS Code — drop
 
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 
-[Available Agents](#available-agents) • [Quick Start](#quick-start) • [How It Works](#how-it-works)
+[Available Agents](#available-agents) • [Available Prompts](#available-prompts) • [Quick Start](#quick-start) • [How It Works](#how-it-works)
 
 ## Available Agents
 
@@ -58,11 +58,11 @@ Both agents are designed to work across model tiers:
 
 All instructions use explicit rules, numbered steps, and tabular formats to minimize ambiguity regardless of model capability.
 
-## Available Skills
+## Available Prompts
 
-- **[PR Description Generator](skills/generate-pull-request-description.md)** — skill that generates Romanian pull request title and description based on PR context and changed files.
-  - [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/agent?url=vscode%3Achat-agent%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2Fskills%2Fgenerate-pull-request-description.md)
-  - [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/agent?url=vscode-insiders%3Achat-agent%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2Fskills%2Fgenerate-pull-request-description.md)
+| Prompt | Description | Install |
+| --- | --- | --- |
+| **[PR Description Generator](prompts/generate-pull-request-description.md)** | Generates a PR title and description in Romanian with emoticons, focused on business impact. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/prompt?url=vscode%3Achat-prompt%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2Fprompts%2Fgenerate-pull-request-description.md) [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/prompt?url=vscode-insiders%3Achat-prompt%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2Fprompts%2Fgenerate-pull-request-description.md) |
 
 ## Project Structure
 
@@ -70,8 +70,8 @@ All instructions use explicit rules, numbered steps, and tabular formats to mini
 agents/
 ├── react-19-plan.agent.md                  # Planning agent for React 19 projects
 └── expert-react-frontend-engineer.agent.md # Implementation agent for React 19
-skills/
-└── generate-pull-request-description.md    # PR title/description generator skill
+prompts/
+└── generate-pull-request-description.md    # PR title/description generator prompt
 ```
 
 ## Resources
