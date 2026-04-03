@@ -2,7 +2,7 @@
 name: generate-pull-request-description
 description: "Generates a PR title and description in Romanian with emoticons, focused on business impact."
 agent: "agent"
-model: "GPT-4.1"
+model: ["Raptor mini","GPT-4.1"]
 tools:
   - vscode
   - execute
