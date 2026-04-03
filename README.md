@@ -62,7 +62,8 @@ All instructions use explicit rules, numbered steps, and tabular formats to mini
 
 | Prompt | Description | Install |
 | --- | --- | --- |
-| **[PR Description Generator](prompts/generate-pull-request-description.md)** | Generates a PR title and description in Romanian with emoticons, focused on business impact. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/prompt?url=vscode%3Achat-prompt%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2Fprompts%2Fgenerate-pull-request-description.md) [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/prompt?url=vscode-insiders%3Achat-prompt%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2Fprompts%2Fgenerate-pull-request-description.md) |
+| **[PR Description Generator (RO)](prompts/generate-pull-request-description.md)** | Generates a PR title and description in Romanian with emoticons, focused on business impact. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/prompt?url=vscode%3Achat-prompt%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2Fprompts%2Fgenerate-pull-request-description.md) [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/prompt?url=vscode-insiders%3Achat-prompt%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2Fprompts%2Fgenerate-pull-request-description.md) |
+| **[PR Description Generator (EN)](prompts/generate-pull-request-description-en.md)** | Generates a PR title and description in English with emoticons, focused on business impact. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/prompt?url=vscode%3Achat-prompt%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2Fprompts%2Fgenerate-pull-request-description-en.md) [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/prompt?url=vscode-insiders%3Achat-prompt%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2Fprompts%2Fgenerate-pull-request-description-en.md) |
 
 ## Project Structure
 
@@ -71,7 +72,8 @@ agents/
 ├── react-19-plan.agent.md                  # Planning agent for React 19 projects
 └── expert-react-frontend-engineer.agent.md # Implementation agent for React 19
 prompts/
-└── generate-pull-request-description.md    # PR title/description generator prompt
+├── generate-pull-request-description.md     # PR title/description generator (Romanian)
+└── generate-pull-request-description-en.md  # PR title/description generator (English)
 ```
 
 ## Resources

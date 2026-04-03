@@ -1,6 +1,6 @@
 ---
-name: generate-pull-request-description
-description: "Generates a PR title and description in Romanian with emoticons, focused on business impact."
+name: generate-pull-request-description-en
+description: "Generates a PR title and description in English with emoticons, focused on business impact."
 agent: agent
 model: ["GPT-4.1"]
 tools:
@@ -45,38 +45,38 @@ Internally trace the end-to-end flow, identify business impact, motivation, beha
 
 ## Output Format
 
-### ✅ Titlu Pull Request
+### ✅ Pull Request Title
 
-A single line in **Romanian** that:
+A single line in **English** that:
 
 - Opens with a relevant emoticon
 - Captures the business essence of the change
 - Does **not** mention file names, class names, or method names
 
-### ✅ Descriere Pull Request
+### ✅ Pull Request Description
 
-Write in **Romanian** with emoticons. Keep the description **concise and focused** — cover the essentials without padding. Target a length that a reviewer can read in under 2 minutes.
+Write in **English** with emoticons. Keep the description **concise and focused** — cover the essentials without padding. Target a length that a reviewer can read in under 2 minutes.
 
 Structure using these sections in order:
 
-#### 📝 Rezumat
+#### 📝 Summary
 
 2–4 sentences: What was the problem or need? Why was this change necessary? What is the business value? This replaces a long context section — be direct.
 
-#### ✏️ Ce s-a schimbat
+#### ✏️ What Changed
 
 For each functional change, describe **what it does** and **what business rule it implements**. Describe behavior, NOT code structure. Do NOT mention file names or class names. Use a bulleted list if there are multiple changes.
 
-#### ↔️ Comportament înainte și după
+#### ↔️ Before & After
 
 Concrete before/after comparisons:
 
-- **Înainte:** [what the system did or did not do]
-- **După:** [what the system does now]
+- **Before:** [what the system did or did not do]
+- **After:** [what the system does now]
 
 One pair per meaningful behavioral change. Keep it factual.
 
-#### ⚠️ Note pentru reviewer *(opțional — only if there are breaking changes, risks, or non-obvious decisions)*
+#### ⚠️ Reviewer Notes *(optional — only if there are breaking changes, risks, or non-obvious decisions)*
 
 Brief notes on breaking changes, edge cases, or important design decisions. Omit this section entirely if there is nothing noteworthy.
 
@@ -84,7 +84,7 @@ Brief notes on breaking changes, edge cases, or important design decisions. Omit
 
 ## Constraints
 
-- 🇷🇴 **Romanian only** — English only for technical terms with no Romanian equivalent.
+- 🇬🇧 **English only** — use clear, professional language throughout.
 - 😀 **Emoticons** — in section headers and the title.
 - 🚫 **No file/class names** — the reviewer sees these in the "Changes" tab.
 - ✅ **Evidence-based** — every claim must come from the code or commits. Do not invent context.
