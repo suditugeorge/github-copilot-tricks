@@ -2,7 +2,7 @@
 name: 'PR Code Review Pipeline'
 description: 'Multi-step code review pipeline for pull requests: general review + security review, saved to code-review/ folder'
 model: Claude Sonnet 4.6 (copilot)
-tools: [agent, read, search, execute, edit/editFiles, web, browser, todo, 'context7/*', github.vscode-pull-request-github/issue_fetch, github.vscode-pull-request-github/labels_fetch, github.vscode-pull-request-github/notification_fetch, github.vscode-pull-request-github/doSearch, github.vscode-pull-request-github/activePullRequest, github.vscode-pull-request-github/pullRequestStatusChecks, github.vscode-pull-request-github/openPullRequest, github.vscode-pull-request-github/create_pull_request, github.vscode-pull-request-github/resolveReviewThread]
+tools: [vscode, execute, read, agent, edit/editFiles, search, web, 'context7/*', browser, github.vscode-pull-request-github/issue_fetch, github.vscode-pull-request-github/labels_fetch, github.vscode-pull-request-github/notification_fetch, github.vscode-pull-request-github/doSearch, github.vscode-pull-request-github/activePullRequest, github.vscode-pull-request-github/pullRequestStatusChecks, github.vscode-pull-request-github/openPullRequest, github.vscode-pull-request-github/create_pull_request, github.vscode-pull-request-github/resolveReviewThread, todo]
 ---
 
 # PR Code Review Pipeline

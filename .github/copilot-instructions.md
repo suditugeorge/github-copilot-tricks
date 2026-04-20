@@ -1,16 +1,24 @@
 # Project Guidelines
 
-This is a curated collection of custom **GitHub Copilot agent modes** (`.agent.md` files) for VS Code. There is no application code—the deliverables are the agent files themselves and their documentation.
+This is a curated collection of custom **GitHub Copilot agent modes** (`.agent.md` files), **reusable prompts** (`.prompt.md` files), and **skills** (`SKILL.md` packages) for VS Code. There is no application code—the deliverables are the agent/prompt/skill files themselves and their documentation.
+
+The repository is compatible with the [Awesome Coding Assistants](https://github.com/jlacube/awesome-coding-assistants-vscode) VS Code extension, which auto-detects files under `.github/agents/`, `.github/prompts/`, and `.github/skills/`.
 
 ## Architecture
 
 ```
-agents/           # All .agent.md files live here
+.github/
+  agents/         # All .agent.md files live here
+  prompts/        # All .prompt.md files live here
+  skills/         # Each skill is a folder containing a SKILL.md file
+  copilot-instructions.md
 README.md         # Public-facing docs with install badges and usage
 LICENSE           # MIT
 ```
 
-- Each agent is a standalone `.agent.md` file in `agents/`.
+- Each agent is a standalone `.agent.md` file in `.github/agents/`.
+- Each prompt is a standalone `.prompt.md` file in `.github/prompts/`.
+- Each skill is a `SKILL.md` file inside its own folder under `.github/skills/{skill-name}/`.
 - Agents can reference each other via `handoffs` (see the React 19 plan → implementation pair).
 
 ## Agent File Conventions
@@ -42,10 +50,27 @@ When adding a new agent, update `README.md`:
 1. Add a row to the **Available Agents** table with name, description, and install badges.
 2. The install badge URLs follow the pattern:
    ```
-   https://aka.ms/awesome-copilot/install/agent?url=vscode%3Achat-agent%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2Fagents%2F{filename}
+   https://aka.ms/awesome-copilot/install/agent?url=vscode%3Achat-agent%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2F.github%2Fagents%2F{filename}
    ```
 3. Update the **Project Structure** tree if the directory layout changes.
 4. If agents form a workflow pair, document the interaction under **How It Works**.
+
+When adding a new prompt, update `README.md`:
+
+1. Add a row to the **Available Prompts** table with name, description, and install badges.
+2. The install badge URLs follow the pattern:
+   ```
+   https://aka.ms/awesome-copilot/install/prompt?url=vscode%3Achat-prompt%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2F.github%2Fprompts%2F{filename}
+   ```
+
+When adding a new skill, update `README.md`:
+
+1. Add a row to the **Available Skills** table with name, description, and install badges.
+2. The install badge URLs follow the pattern:
+   ```
+   https://aka.ms/awesome-copilot/install/skill?url=vscode%3Achat-skill%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2F.github%2Fskills%2F{skill-name}%2FSKILL.md
+   ```
+3. Update the **Project Structure** tree if the directory layout changes.
 
 ## Style
 
