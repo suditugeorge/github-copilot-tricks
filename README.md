@@ -19,6 +19,9 @@ Curated collection of custom **GitHub Copilot agent modes**, **reusable prompts*
 
 Click the **VS Code Install** badge next to any agent or prompt above. It will open VS Code and install the file directly.
 
+> [!NOTE]
+> **Skills** do not support one-click install — VS Code has no URI handler for skill installation. To install a skill, copy its folder to your `.github/skills/` directory (see Option C below).
+
 ### Option B: Browse via Awesome Coding Assistants
 
 Install the [Awesome Coding Assistants](https://marketplace.visualstudio.com/items?itemName=jlacube.awesome-coding-assistants) extension, then add this repository as a custom source in your VS Code settings:
@@ -87,7 +90,7 @@ All instructions use explicit rules, numbered steps, and tabular formats to mini
 
 | Skill | Description | Install |
 | --- | --- | --- |
-| **[Swagger / OpenAPI Documentation](.github/skills/swagger-documentation/SKILL.md)** | Guidelines and examples for writing OpenAPI/Swagger documentation — covers Resource schemas, FormRequest parameter mapping, middleware headers, and Laravel validator-to-OpenAPI type conversion. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/skill?url=vscode%3Achat-skill%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2F.github%2Fskills%2Fswagger-documentation%2FSKILL.md) [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/skill?url=vscode-insiders%3Achat-skill%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2F.github%2Fskills%2Fswagger-documentation%2FSKILL.md) |
+| **[Swagger / OpenAPI Documentation](.github/skills/swagger-documentation/SKILL.md)** | Guidelines and examples for writing OpenAPI/Swagger documentation — covers Resource schemas, FormRequest parameter mapping, middleware headers, and Laravel validator-to-OpenAPI type conversion. | [![View on GitHub](https://img.shields.io/badge/GitHub-View_Skill-24292e?style=flat-square&logo=github&logoColor=white)](https://github.com/suditugeorge/github-copilot-tricks/tree/main/.github/skills/swagger-documentation) Copy the `swagger-documentation/` folder to your `.github/skills/` directory |
 
 ## Project Structure
 

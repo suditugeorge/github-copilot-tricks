@@ -65,10 +65,10 @@ When adding a new prompt, update `README.md`:
 
 When adding a new skill, update `README.md`:
 
-1. Add a row to the **Available Skills** table with name, description, and install badges.
-2. The install badge URLs follow the pattern:
+1. Add a row to the **Available Skills** table with name, description, and a GitHub folder link badge.
+2. Skills do **not** support one-click VS Code install — `vscode:chat-skill/install` is not a valid URI handler and `aka.ms/awesome-copilot/install/skill` does not exist. Use a GitHub folder badge instead:
    ```
-   https://aka.ms/awesome-copilot/install/skill?url=vscode%3Achat-skill%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2F.github%2Fskills%2F{skill-name}%2FSKILL.md
+   [![View on GitHub](https://img.shields.io/badge/GitHub-View_Skill-24292e?style=flat-square&logo=github&logoColor=white)](https://github.com/suditugeorge/github-copilot-tricks/tree/main/.github/skills/{skill-name}) Copy the `{skill-name}/` folder to your `.github/skills/` directory
    ```
 3. Update the **Project Structure** tree if the directory layout changes.
 
