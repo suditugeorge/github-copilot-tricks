@@ -2,7 +2,7 @@
 name: 'PR Code Review Pipeline'
 description: 'Multi-step code review pipeline for pull requests: general review + security review, saved to code-review/ folder'
 model: Claude Sonnet 4.6 (copilot)
-tools: [vscode, execute, read, agent, edit/editFiles, search, web, 'context7/*', browser, github.vscode-pull-request-github/issue_fetch, github.vscode-pull-request-github/labels_fetch, github.vscode-pull-request-github/notification_fetch, github.vscode-pull-request-github/doSearch, github.vscode-pull-request-github/activePullRequest, github.vscode-pull-request-github/pullRequestStatusChecks, github.vscode-pull-request-github/openPullRequest, github.vscode-pull-request-github/create_pull_request, github.vscode-pull-request-github/resolveReviewThread, todo]
+tools: [agent, read, search, execute, edit/editFiles, web, browser, todo, 'context7/*', github.vscode-pull-request-github/issue_fetch, github.vscode-pull-request-github/labels_fetch, github.vscode-pull-request-github/notification_fetch, github.vscode-pull-request-github/doSearch, github.vscode-pull-request-github/activePullRequest, github.vscode-pull-request-github/pullRequestStatusChecks, github.vscode-pull-request-github/openPullRequest, github.vscode-pull-request-github/create_pull_request, github.vscode-pull-request-github/resolveReviewThread]
 ---
 
 # PR Code Review Pipeline
@@ -19,14 +19,30 @@ You are a senior code review orchestrator. You will execute a **multi-step revie
 
 Use the GitHub Pull Request tools to retrieve the PR:
 
-1. Call `github.vscode-pull-request-github/issue_fetch` with the PR number `${input:pr_number}` to get the PR title, description, author, labels, and linked issues.
+1. Call `github.vscode-pull-request-github/issue_fetch` with the PR number `${input:pr_number}` to get the PR title, description, author, labels, linked issues, **and the source branch name (`head.ref`)**.
 2. Call `github.vscode-pull-request-github/pullRequestStatusChecks` to get CI/CD status.
 3. Read all changed files in the PR. Navigate to each changed file and read the full diff. Understand:
    - Which files were added, modified, or deleted
    - The full context of every change (not just the diff hunks — read surrounding code)
    - The purpose of the PR based on title, description, and code changes
 
-4. Determine a **short task description slug** from the PR title (e.g., `add-patient-crud`, `fix-auth-middleware`, `update-appointment-ui`). This slug will be used for naming review files.
+4. Build the **review file identifier** used to name the output files. The identifier MUST be derived from the PR itself (NOT a generated slug from the title) using this exact rule:
+
+   ```
+   review_id = "pr-{pr_number}-{branch_slug}"
+   ```
+
+   Where `{branch_slug}` is the PR's source branch name (`head.ref`) sanitized for filesystem safety:
+   - Lowercase the branch name
+   - Replace `/`, `\`, spaces, and any character that is not `[a-z0-9-_]` with `-`
+   - Collapse consecutive `-` and trim leading/trailing `-`
+
+   Examples:
+   - PR #42 on branch `T-024B` → `pr-42-t-024b`
+   - PR #7 on branch `feature/add-patient-crud` → `pr-7-feature-add-patient-crud`
+   - PR #115 on branch `fix/auth_middleware` → `pr-115-fix-auth_middleware`
+
+   If the branch name cannot be retrieved, fall back to `pr-{pr_number}` only. Do NOT invent a slug from the PR title.
 
 5. Create the `code-review/` directory in the workspace root if it doesn't exist.
 
@@ -88,7 +104,7 @@ Apply the following review guidelines:
 
 ### Output Format
 
-Save the review as a markdown file at: `code-review/{task-slug}-general-review.md`
+Save the review as a markdown file at: `code-review/{review_id}-general-review.md` (e.g. `code-review/pr-42-t-024b-general-review.md`)
 
 Use this structure:
 
@@ -134,9 +150,9 @@ Use this structure:
 
 ---
 
-## Step 3: Security Review
+## Step 3: Security Review (De-duplicated)
 
-Launch a second sub-agent to perform a dedicated security review.
+Launch a second sub-agent to perform a dedicated security review. **This step runs AFTER the general review file has been written, and the security agent is explicitly instructed not to repeat findings from it.**
 
 **Agent configuration:**
 - Model: Claude Sonnet 4.6 (copilot)
@@ -145,6 +161,36 @@ Launch a second sub-agent to perform a dedicated security review.
 **Instructions for the sub-agent:**
 
 You are a security-focused code review specialist with expertise in OWASP Top 10, Zero Trust principles, and AI/ML security. You have access to `mcp_context7_query-docs` and `mcp_context7_resolve-library-id` — use them to look up security best practices for any library or framework encountered in the code.
+
+### MANDATORY: Read the General Review First
+
+BEFORE doing any analysis, you MUST read the file `code-review/{review_id}-general-review.md` produced in Step 2. Build a mental index of every issue already reported there (file, line, and short description).
+
+### Anti-Duplication Rules (CRITICAL — saves output tokens)
+
+You WILL NEVER restate, re-describe, or re-suggest a fix for any issue already covered in the general review. Specifically:
+
+- If a vulnerability is already listed in the general review (even under a non-security heading), you MUST NOT include it again in your full Critical/Warning sections.
+- Instead, add a single line to the **"Cross-Reference"** section (see output format) of the form:
+  `- [confirmed] {short title} — see general review § {section} ({file}:{line}). Severity: {Critical|Warning}. CWE: {id if applicable}.`
+- Only add a NEW full entry if you are contributing **net-new security value** beyond the general review, such as:
+  - A specific OWASP/CWE classification + attack scenario the general review did not provide
+  - A different attack vector or exploit chain on the same code
+  - A threat-model-level issue (trust boundaries, privilege escalation paths) not surfaced generally
+  - A finding the general review missed entirely
+
+When in doubt: cross-reference, do not duplicate. Your value is depth on security, not breadth across all code quality.
+
+### Scope Restriction
+
+Do NOT report code quality, readability, naming, performance (unless DoS-relevant), test coverage, or architecture concerns — those belong to the general review. Stay strictly in the security lane:
+- Confidentiality, Integrity, Availability
+- AuthN / AuthZ / tenancy isolation
+- Injection, deserialization, SSRF, XSS
+- Cryptography and secrets management
+- Supply chain / dependency CVEs
+- Security logging & monitoring
+- LLM-specific risks (if applicable)
 
 ### Step 0: Create Targeted Review Plan
 
@@ -202,7 +248,7 @@ Select 3-5 most relevant check categories based on context.
 
 ### Output Format
 
-Save the security review as a markdown file at: `code-review/{task-slug}-security-review.md`
+Save the security review as a markdown file at: `code-review/{review_id}-security-review.md` (e.g. `code-review/pr-42-t-024b-security-review.md`)
 
 Use this structure:
 
@@ -210,11 +256,13 @@ Use this structure:
 # Security Review: {PR Title}
 
 **PR**: #{pr_number}
+**Branch**: {branch_name}
 **Author**: {author}
 **Date**: {today's date}
 **Security Assessment**: [Pass / Conditional Pass / Fail]
-**Critical Vulnerabilities**: {count}
-**Warnings**: {count}
+**Net-New Critical Vulnerabilities**: {count}
+**Net-New Warnings**: {count}
+**Confirmed from General Review**: {count}
 
 ## Threat Model
 
@@ -224,7 +272,13 @@ Use this structure:
 
 {Which OWASP categories were selected and why}
 
-## ⛔ Critical Vulnerabilities (Must Fix Before Merge)
+## 🔁 Cross-Reference (Already Covered in General Review)
+
+{One-line entries pointing to the general review for issues you confirm but do NOT re-describe. Format:
+`- [confirmed] {short title} — see general review § {section} ({file}:{line}). Severity: {Critical|Warning}. CWE: {id if applicable}.`
+If there are none, write "None."}
+
+## ⛔ Critical Vulnerabilities (Net-New, Must Fix Before Merge)
 
 {Each vulnerability with:
 - CWE ID if applicable
@@ -234,9 +288,9 @@ Use this structure:
 - Recommended fix with code example
 }
 
-## ⚠️ Security Warnings
+## ⚠️ Security Warnings (Net-New)
 
-{Each warning with file, description, risk level, and mitigation}
+{Each warning with file, description, risk level, and mitigation. Do NOT include items already in the general review — list those under Cross-Reference instead.}
 
 ## ✅ Security Best Practices Observed
 
@@ -267,14 +321,15 @@ Use this structure:
 After both reviews are complete, output a brief summary to the user:
 
 ```
-✅ Code Review Pipeline Complete for PR #{pr_number}
+✅ Code Review Pipeline Complete for PR #{pr_number} ({branch_name})
 
-📄 General Review: code-review/{task-slug}-general-review.md
-🔒 Security Review: code-review/{task-slug}-security-review.md
+📄 General Review:  code-review/{review_id}-general-review.md
+🔒 Security Review: code-review/{review_id}-security-review.md
 
 Summary:
-- Critical issues: {count}
-- Important issues: {count}
-- Security vulnerabilities: {count}
+- Critical issues (general):       {count}
+- Important issues (general):      {count}
+- Net-new security vulnerabilities: {count}
+- Confirmed from general review:    {count}
 - Overall assessment: {Pass/Fail/Conditional}
 ```
