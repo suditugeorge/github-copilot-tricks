@@ -1,8 +1,7 @@
 ---
 name: 'PR Code Review Pipeline'
 description: 'Multi-step code review pipeline for pull requests: general review + security review, saved to code-review/ folder'
-model: Claude Sonnet 4.6 (copilot)
-tools: [agent, read, search, execute, edit/editFiles, web, browser, todo, 'context7/*', github.vscode-pull-request-github/issue_fetch, github.vscode-pull-request-github/labels_fetch, github.vscode-pull-request-github/notification_fetch, github.vscode-pull-request-github/doSearch, github.vscode-pull-request-github/activePullRequest, github.vscode-pull-request-github/pullRequestStatusChecks, github.vscode-pull-request-github/openPullRequest, github.vscode-pull-request-github/create_pull_request, github.vscode-pull-request-github/resolveReviewThread]
+tools: [vscode, execute, read, agent, browser, 'context7/*', GitHub.vscode-pull-request-github, edit/editFiles, search, web, todo]
 ---
 
 # PR Code Review Pipeline
@@ -52,13 +51,18 @@ Use the GitHub Pull Request tools to retrieve the PR:
 
 ## Step 2: General Code Review
 
-Launch a sub-agent to perform the general code review.
+You MUST spawn a sub-agent to perform the general code review. To do this, emit a tool call with:
+- **Tool name**: `agent`
+- **Parameters**:
+  - `description`: A short 3-5 word summary (e.g., `"General code review of PR {pr_number}"`)
+  - `prompt`: The complete general review instructions block below (copy it verbatim into the `prompt` parameter)
 
-**Agent configuration:**
-- Model: Claude Sonnet 4.6 (copilot)
+**CRITICAL: Do NOT include an `agentName` parameter.** Omit it entirely so the sub-agent uses the current base model.
+
+**Sub-agent configuration:**
 - Thinking effort: High
 
-**Instructions for the sub-agent:**
+**Instructions for the sub-agent (paste this entire block into the `prompt` parameter):**
 
 You are a senior software engineer performing a comprehensive code review. You have access to `mcp_context7_query-docs` and `mcp_context7_resolve-library-id` — use them to look up documentation for any library or framework you encounter in the code (React, Laravel, Tailwind, shadcn/ui, etc.) to validate that the code follows current best practices.
 
@@ -100,7 +104,7 @@ Apply the following review guidelines:
 - **Security**: No secrets in code, input validation, parameterized queries, proper auth checks
 - **Testing**: Coverage of critical paths, descriptive test names, AAA pattern, independent tests, edge cases
 - **Performance**: No N+1 queries, proper indexing, caching, resource cleanup, pagination, lazy loading
-- **Architecture**: Adherence to project conventions (multi-tenancy via `clinic_id`, TenantModel trait, etc.)
+- **Architecture**: Adherence to established project conventions and patterns
 
 ### Output Format
 
@@ -152,13 +156,20 @@ Use this structure:
 
 ## Step 3: Security Review (De-duplicated)
 
-Launch a second sub-agent to perform a dedicated security review. **This step runs AFTER the general review file has been written, and the security agent is explicitly instructed not to repeat findings from it.**
+You MUST spawn a second sub-agent to perform the dedicated security review. **This step runs AFTER the general review file has been written, and the security sub-agent is explicitly instructed not to repeat findings from it.**
 
-**Agent configuration:**
-- Model: Claude Sonnet 4.6 (copilot)
+To spawn the security sub-agent, emit a tool call with:
+- **Tool name**: `agent`
+- **Parameters**:
+  - `description`: A short 3-5 word summary (e.g., `"Security review of PR {pr_number}"`)
+  - `prompt`: The complete security review instructions block below (copy it verbatim into the `prompt` parameter)
+
+**CRITICAL: Do NOT include an `agentName` parameter.** Omit it entirely so the sub-agent uses the current base model.
+
+**Sub-agent configuration:**
 - Thinking effort: High
 
-**Instructions for the sub-agent:**
+**Instructions for the sub-agent (paste this entire block into the `prompt` parameter):**
 
 You are a security-focused code review specialist with expertise in OWASP Top 10, Zero Trust principles, and AI/ML security. You have access to `mcp_context7_query-docs` and `mcp_context7_resolve-library-id` — use them to look up security best practices for any library or framework encountered in the code.
 
@@ -302,7 +313,7 @@ If there are none, write "None."}
 - [ ] Input validation on all user inputs
 - [ ] Parameterized queries (no SQL injection)
 - [ ] Proper authentication checks
-- [ ] Proper authorization checks (multi-tenancy: clinic_id scoping)
+- [ ] Proper authorization checks (including tenant/data isolation if applicable)
 - [ ] No XSS vulnerabilities
 - [ ] Secure error handling (no stack traces exposed)
 - [ ] Security-relevant actions are logged
