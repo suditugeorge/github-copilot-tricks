@@ -92,7 +92,7 @@ Custom modes for [Zoo Code](https://docs.zoocode.dev/) — an AI coding assistan
 
 | Mode | Description | Install |
 | --- | --- | --- |
-| **[One-Shot Feature Planner](.roo/zoo-modes/one-shot-feature-issue-planner.yaml)** | Turns a single new-feature request into a complete, issue-ready implementation plan without follow-up questions. Read-only mode that inspects the codebase and produces a structured GitHub issue draft. | [![View on GitHub](https://img.shields.io/badge/GitHub-View_Mode-24292e?style=flat-square&logo=github&logoColor=white)](https://github.com/suditugeorge/github-copilot-tricks/tree/main/.roo/zoo-modes/one-shot-feature-issue-planner.yaml) Import the `.yaml` file via Zoo Code's Modes view (Import button) |
+| **[One-Shot Feature Planner](.roo/zoo-modes/one-shot-feature-issue-planner.yaml)** | Turns a new-feature request into a complete, issue-ready implementation plan. Asks clarifying questions when needed, inspects the codebase, and saves the plan to a markdown file in the `.plans/` folder. | [![View on GitHub](https://img.shields.io/badge/GitHub-View_Mode-24292e?style=flat-square&logo=github&logoColor=white)](https://github.com/suditugeorge/github-copilot-tricks/tree/main/.roo/zoo-modes/one-shot-feature-issue-planner.yaml) Import the `.yaml` file via Zoo Code's Modes view (Import button) |
 
 > [!NOTE]
 > Zoo Code modes use the import/export feature described in the [Custom Modes documentation](https://docs.zoocode.dev/features/custom-modes). To install: open the Zoo Code panel → Modes view → click the Import button → select the `.yaml` file. Choose **Project** (current workspace only) or **Global** (all projects).
