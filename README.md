@@ -4,7 +4,7 @@ Curated collection of custom **GitHub Copilot agent modes**, **reusable prompts*
 
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 
-[Available Agents](#available-agents) • [Available Prompts](#available-prompts) • [Available Skills](#available-skills) • [Quick Start](#quick-start) • [How It Works](#how-it-works)
+[Available Agents](#available-agents) • [Available Prompts](#available-prompts) • [Available Skills](#available-skills) • [Available Zoo Code Modes](#available-zoo-code-modes) • [Quick Start](#quick-start) • [How It Works](#how-it-works)
 
 ## Available Agents
 
@@ -86,6 +86,17 @@ All instructions use explicit rules, numbered steps, and tabular formats to mini
 | **[PR Description Generator (EN)](.github/prompts/generate-pull-request-description-en.prompt.md)** | Generates a PR title and description in English with emoticons, focused on business impact. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/prompt?url=vscode%3Achat-prompt%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2F.github%2Fprompts%2Fgenerate-pull-request-description-en.prompt.md) [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/prompt?url=vscode-insiders%3Achat-prompt%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2F.github%2Fprompts%2Fgenerate-pull-request-description-en.prompt.md) |
 | **[PR Code Review Pipeline](.github/prompts/pr-code-review.prompt.md)** | Multi-step code review pipeline for pull requests: runs a general review + security review and saves results to a `code-review/` folder. | [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/prompt?url=vscode%3Achat-prompt%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2F.github%2Fprompts%2Fpr-code-review.prompt.md) [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://aka.ms/awesome-copilot/install/prompt?url=vscode-insiders%3Achat-prompt%2Finstall%3Furl%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fsuditugeorge%2Fgithub-copilot-tricks%2Fmain%2F.github%2Fprompts%2Fpr-code-review.prompt.md) |
 
+## Available Zoo Code Modes
+
+Custom modes for [Zoo Code](https://docs.zoocode.dev/) — an AI coding assistant extension for VS Code. These are portable YAML files you can import into any Zoo Code project.
+
+| Mode | Description | Install |
+| --- | --- | --- |
+| **[One-Shot Feature Planner](.roo/zoo-modes/one-shot-feature-issue-planner.yaml)** | Turns a single new-feature request into a complete, issue-ready implementation plan without follow-up questions. Read-only mode that inspects the codebase and produces a structured GitHub issue draft. | [![View on GitHub](https://img.shields.io/badge/GitHub-View_Mode-24292e?style=flat-square&logo=github&logoColor=white)](https://github.com/suditugeorge/github-copilot-tricks/tree/main/.roo/zoo-modes/one-shot-feature-issue-planner.yaml) Import the `.yaml` file via Zoo Code's Modes view (Import button) |
+
+> [!NOTE]
+> Zoo Code modes use the import/export feature described in the [Custom Modes documentation](https://docs.zoocode.dev/features/custom-modes). To install: open the Zoo Code panel → Modes view → click the Import button → select the `.yaml` file. Choose **Project** (current workspace only) or **Global** (all projects).
+
 ## Available Skills
 
 | Skill | Description | Install |
@@ -109,9 +120,16 @@ All instructions use explicit rules, numbered steps, and tabular formats to mini
 └── copilot-instructions.md                           # Project guidelines for Copilot
 ```
 
+```text
+.roo/
+└── zoo-modes/
+    └── one-shot-feature-issue-planner.yaml            # Zoo Code mode: one-shot feature planner
+```
+
 ## Resources
 
 - [VS Code Custom Chat Modes](https://code.visualstudio.com/docs/copilot/chat/chat-modes)
+- [Zoo Code Custom Modes](https://docs.zoocode.dev/features/custom-modes) — how to create, import, and export Zoo Code modes
 - [Awesome Coding Assistants](https://github.com/jlacube/awesome-coding-assistants-vscode) — VS Code extension to browse, install, and manage AI coding assistant customizations
 - [awesome-copilot](https://github.com/github/awesome-copilot) — community collection of Copilot agents and prompts
 - [React 19 Documentation](https://react.dev/blog/2024/12/05/react-19)
