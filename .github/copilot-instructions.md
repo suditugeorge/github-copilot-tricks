@@ -12,6 +12,8 @@ The repository is compatible with the [Awesome Coding Assistants](https://github
   prompts/        # All .prompt.md files live here
   skills/         # Each skill is a folder containing a SKILL.md file
   copilot-instructions.md
+.agents/
+  skills/         # Cross-harness skills (agentskills.io spec) — discovered by Zoo Code, Claude Code, Cursor, etc.
 .roo/
   zoo-modes/      # All Zoo Code mode .yaml files live here
 README.md         # Public-facing docs with install badges and usage
@@ -20,7 +22,8 @@ LICENSE           # MIT
 
 - Each agent is a standalone `.agent.md` file in `.github/agents/`.
 - Each prompt is a standalone `.prompt.md` file in `.github/prompts/`.
-- Each skill is a `SKILL.md` file inside its own folder under `.github/skills/{skill-name}/`.
+- Each Copilot skill is a `SKILL.md` file inside its own folder under `.github/skills/{skill-name}/`.
+- Each cross-harness skill is a `SKILL.md` file inside its own folder under `.agents/skills/{skill-name}/` (follows the [agentskills.io](https://agentskills.io) spec; discovered by Zoo Code, Claude Code, Cursor, and others).
 - Each Zoo Code mode is a standalone `.yaml` file in `.roo/zoo-modes/`.
 - Agents can reference each other via `handoffs` (see the React 19 plan → implementation pair).
 
@@ -68,11 +71,14 @@ When adding a new prompt, update `README.md`:
 
 When adding a new skill, update `README.md`:
 
-1. Add a row to the **Available Skills** table with name, description, and a GitHub folder link badge.
+1. Add a row to the appropriate **Available Skills** table:
+   - **GitHub Copilot Skills** table for skills in `.github/skills/`
+   - **Zoo Code / Cross-Harness Skills** table for skills in `.agents/skills/`
 2. Skills do **not** support one-click VS Code install — `vscode:chat-skill/install` is not a valid URI handler and `aka.ms/awesome-copilot/install/skill` does not exist. Use a GitHub folder badge instead:
    ```
    [![View on GitHub](https://img.shields.io/badge/GitHub-View_Skill-24292e?style=flat-square&logo=github&logoColor=white)](https://github.com/suditugeorge/github-copilot-tricks/tree/main/.github/skills/{skill-name}) Copy the `{skill-name}/` folder to your `.github/skills/` directory
    ```
+   For `.agents/skills/` skills, use the `.agents/skills/` path in the badge URL and instruct users to copy to `.agents/skills/`.
 3. Update the **Project Structure** tree if the directory layout changes.
 
 When adding a new Zoo Code mode, update `README.md`:

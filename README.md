@@ -1,6 +1,6 @@
 # GitHub Copilot Tricks
 
-Curated collection of custom **GitHub Copilot agent modes**, **reusable prompts**, and **skills** for VS Code — install them directly via badge links or browse the catalog with the [Awesome Coding Assistants](https://github.com/jlacube/awesome-coding-assistants-vscode) extension.
+Curated collection of custom **GitHub Copilot agent modes**, **reusable prompts**, **skills**, and **Zoo Code modes** for VS Code — install them directly via badge links or browse the catalog with the [Awesome Coding Assistants](https://github.com/jlacube/awesome-coding-assistants-vscode) extension.
 
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 
@@ -99,9 +99,27 @@ Custom modes for [Zoo Code](https://docs.zoocode.dev/) — an AI coding assistan
 
 ## Available Skills
 
+Skills are organized by harness compatibility:
+
+- **`.github/skills/`** — GitHub Copilot skills (discovered by Copilot's skill system)
+- **`.agents/skills/`** — Cross-harness skills following the [agentskills.io](https://agentskills.io) spec; discovered by Zoo Code, Claude Code, Cursor, and other agents that support the `.agents/` convention
+
+> [!NOTE]
+> Zoo Code discovers skills from **both** `.agents/skills/` and `.roo/skills/` (with `.roo/` taking priority). GitHub Copilot only discovers skills from `.github/skills/`. See [Zoo Code Skills documentation](https://docs.zoocode.dev/features/skills) for details.
+
+### GitHub Copilot Skills
+
 | Skill | Description | Install |
 | --- | --- | --- |
 | **[Swagger / OpenAPI Documentation](.github/skills/swagger-documentation/SKILL.md)** | Guidelines and examples for writing OpenAPI/Swagger documentation — covers Resource schemas, FormRequest parameter mapping, middleware headers, and Laravel validator-to-OpenAPI type conversion. | [![View on GitHub](https://img.shields.io/badge/GitHub-View_Skill-24292e?style=flat-square&logo=github&logoColor=white)](https://github.com/suditugeorge/github-copilot-tricks/tree/main/.github/skills/swagger-documentation) Copy the `swagger-documentation/` folder to your `.github/skills/` directory |
+
+### Zoo Code / Cross-Harness Skills (`.agents/skills/`)
+
+| Skill | Description | Install |
+| --- | --- | --- |
+| **[React 19 Concurrent Patterns](.agents/skills/react19-concurrent-patterns/SKILL.md)** | React 19 concurrent and async patterns — covers `use()`, `useActionState`, `useFormStatus`, `useOptimistic`, `useTransition`, `useDeferredValue`, and Suspense for async UI work. | [![View on GitHub](https://img.shields.io/badge/GitHub-View_Skill-24292e?style=flat-square&logo=github&logoColor=white)](https://github.com/suditugeorge/github-copilot-tricks/tree/main/.agents/skills/react19-concurrent-patterns) Copy the `react19-concurrent-patterns/` folder to your `.agents/skills/` directory |
+| **[React 19 Source Patterns](.agents/skills/react19-source-patterns/SKILL.md)** | React 19 source-file authoring patterns — covers ref-as-prop (no `forwardRef`), `<Context>` as provider, `defaultProps` removal, `useRef(null)`, `createRoot`, and removed APIs. | [![View on GitHub](https://img.shields.io/badge/GitHub-View_Skill-24292e?style=flat-square&logo=github&logoColor=white)](https://github.com/suditugeorge/github-copilot-tricks/tree/main/.agents/skills/react19-source-patterns) Copy the `react19-source-patterns/` folder to your `.agents/skills/` directory |
+| **[React 19 Test Patterns](.agents/skills/react19-test-patterns/SKILL.md)** | React 19 test authoring patterns — covers `act()` imports, `fireEvent` vs `Simulate`, StrictMode call-count changes, async action testing, and the `renderWithI18n` helper. | [![View on GitHub](https://img.shields.io/badge/GitHub-View_Skill-24292e?style=flat-square&logo=github&logoColor=white)](https://github.com/suditugeorge/github-copilot-tricks/tree/main/.agents/skills/react19-test-patterns) Copy the `react19-test-patterns/` folder to your `.agents/skills/` directory |
 
 ## Project Structure
 
@@ -121,6 +139,19 @@ Custom modes for [Zoo Code](https://docs.zoocode.dev/) — an AI coding assistan
 ```
 
 ```text
+.agents/
+└── skills/
+    ├── react19-concurrent-patterns/                 # React 19 async/concurrent patterns
+    │   ├── SKILL.md
+    │   └── references/
+    ├── react19-source-patterns/                     # React 19 source-file authoring patterns
+    │   ├── SKILL.md
+    │   └── references/
+    └── react19-test-patterns/                       # React 19 test authoring patterns
+        └── SKILL.md
+```
+
+```text
 .roo/
 └── zoo-modes/
     └── one-shot-feature-issue-planner.yaml            # Zoo Code mode: one-shot feature planner
@@ -130,6 +161,8 @@ Custom modes for [Zoo Code](https://docs.zoocode.dev/) — an AI coding assistan
 
 - [VS Code Custom Chat Modes](https://code.visualstudio.com/docs/copilot/chat/chat-modes)
 - [Zoo Code Custom Modes](https://docs.zoocode.dev/features/custom-modes) — how to create, import, and export Zoo Code modes
+- [Zoo Code Skills](https://docs.zoocode.dev/features/skills) — how Zoo Code discovers skills from `.agents/skills/` and `.roo/skills/`
+- [agentskills.io](https://agentskills.io) — cross-harness skill spec used by Zoo Code, Claude Code, Cursor, and others
 - [Awesome Coding Assistants](https://github.com/jlacube/awesome-coding-assistants-vscode) — VS Code extension to browse, install, and manage AI coding assistant customizations
 - [awesome-copilot](https://github.com/github/awesome-copilot) — community collection of Copilot agents and prompts
 - [React 19 Documentation](https://react.dev/blog/2024/12/05/react-19)
